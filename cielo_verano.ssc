@@ -1,0 +1,108 @@
+//
+// Name: El Cielo de Verano
+// Author: Sergio Cava
+// License: Public Domain
+// Version: 1.1
+// Description: Algunos de los objetos más interesantes del Cielo de Verano en Latitudes medias del Hemisferio Norte
+//
+
+//función que llamaremos cada vez que cambiemos de constelación con argumentos el nombre de la constelación (guardado en el array constellation) y el campo de visión (en aFOV)
+function showConstellation(cName, aFOV)
+{
+	core.selectObjectByName(cName, true);
+	StelMovementMgr.autoZoomIn(5);
+	core.wait(1);
+	StelMovementMgr.zoomTo(aFOV,3);
+	core.wait(1);
+	ConstellationMgr.setFlagArt(true);
+	core.wait(5);
+	ConstellationMgr.setFlagArt(false);
+} 
+
+//Definimos las constelaciones, su campo y el número de objetos en cada constelación
+var constellation = new Array("Serpens", "Draco", "Scorpius", "Hercules", "Ophiuchus", "Sagittarius", "Scutum", "Lyra", "Aquila", "Vulpecula", "Delphinus", "Cygnus");
+var aFOV = new Array(60, 60, 60, 45, 60, 36, 18, 18, 50, 15, 15, 43);
+var npercons = new Array(1, 2, 3, 3, 3, 6, 1, 2, 1, 1, 1, 5);
+
+// RA, DE, FOV, Name, Info, Note
+var listaobjetos = [["15h18m33.23s", "+02d04m51.7s", 1.0, "Cúmulo Globular M5 - NGC 5904", "", ""],
+		  ["17h58m33.43s", "+66d37m59.5s", 1.0, "Nebulosa planetaria -Ojo de gato- NGC6543", "", ""],
+		  ["19h48m10.70s", "+70d16m04.6s", 3.0, "Tyl - ε Draconis", "Separación 3.3 segundos de arco", "Amarilla - Azul"],
+		  ["16h11m58.53s", "-19d27m00.8s", 0.5, "Jabbah - ν Scorpii", "Separación 1.5 segundos de arco", "La doble-doble del sur"],
+		  ["16h17m02.42s", "-22d58m33.9s", 1.0, "Cúmulo Globular M80 - NGC6093", "", ""],
+		  ["16h23m35.23s", "-26d31m32.7s", 1.0, "Cúmulo Globular M4 - NGC6121", "", ""],
+		  ["16h41m41.64s", "+36d27m40.8s", 1.0, "Cúmulo Globular" M13 - NGC6205", "", ""],
+		  ["17h14m38.85s", "+14d23m26.0s", 10.0, "Rasalgethi - α Herculi", "Separación 4.7 segundos de arco", "Roja - Amarilla"],
+		  ["18h01m30.42s", "+21d35m45.6s", 3.0, "95 Herculis", "Separación 6.5 segundos de arco", "Amarilla - Rojiza"],
+		  ["17h18m00.64s", "-24d17m13.0s", 0.02, "o Ophiuchi", "Separación 10.8 segundos de arco", "Amarilla - Azul"],
+		  ["17h29m20.46s", "-23d45m34.8s", 5.0, "Nebulosa planetaria -Pequeño fantasma- NGC6369", "", ""],
+		  ["18h05m28.02s", "+02d29m31.6s", 0.02, "70 Ophiuchi", "Separación 3 segundos de arco", "Amarilla - Roja"],
+		  ["18h02m42.00s", "-22d58m19.2s", 1.0, "Nebulosa Trífida - M20 - NGC6514", "", ""],
+		  ["18h03m24.01s", "-27d53m16.8s", 1.0, "Cúmulo abierto NGC6520 y Nebulosa oscura B86", "", ""],
+		  ["18h03m12.00s", "-24d22m48.0s", 1.5, "Nebulosa de la Laguna - M8 - NGC6523", "", ""],
+		  ["18h20m47.05s", "-16d10m19.2s", 1.5, "Nebulosa del Cisne - M17 - NGC 6618", "", ""],
+		  ["18h36m23.95s", "-23d54m17.1s", 1.5, "Cúmulo Globular M22 - NGC6656", "", ""],
+		  ["19h43m58.03s", "-14d09m13.4s", 1.5, "Nebulosa Planetaria - Pequeña gema - NGC6818", "", ""],
+		  ["18h51m05.05s", "-06d16m12.0s", 1.5, "Cúmulo Abierto M11 - Pato salvaje - NGC6705", "", ""],
+		  ["18h32m20.08s", "+36d59m55.6s", 1.5, "Estrella de Carbono - T Lyrae", "", ""],
+		  ["18h53m35.08s", "+33d01m45.0s", 0.3, "Nebulosa planetaria M57 - Anillo - NGC6720", "", ""],
+		  ["19h04m24.17s", "-05d41m05.4s", 1.3, "Estrella de Carbono - V Aquilae", "", ""],
+		  ["19h59m36.39s", "+22d43m15.8s", 1.5, "Nebulosa planetaria M27 - Manubrio - Dumbbell - NGC6853", "", ""],
+		  ["20h46m38.87s", "+16d07m22.7s", 0.01, "Gamma Delphini", "Separación 9.8 segundos de arco", "Amarilla - Azul"],
+		  ["19h30m43.28s", "+27d57m34.7s", 0.1, "Albireo - beta Cygni", "Separación 34.8 segundos de arco", "Rojiza - Azul"],
+		  ["19h44m48.16s", "+50d31m30.3s", 2.5, "Nebulosa planetaria - Blinking - NGC6826", "", ""],
+		  ["20h12m06.96s", "+38d21m18.0s", 1.0, "Remanente de supernova - Nebulosa Creciente- NGC6888", "", ""],
+		  ["20h45m38.00s", "+30d42m30.0s", 2.5, "Remanente de supernova - Velo oeste- NGC6960", "", ""],
+		  ["20h56m18.97s", "+31d44m34.8s", 2.5, "Remanente de supernova - velo este- NGC6992", "", ""]
+		 ];
+
+var color="#00AAFF";
+var relscale = StelSkyDrawer.getRelativeStarScale();
+var absscale = StelSkyDrawer.getAbsoluteStarScale();
+
+core.clear("starchart");
+GridLinesMgr.setFlagEquatorGrid(false);
+StelMovementMgr.setFlagTracking(true);
+core.setGuiVisible(false);
+ConstellationMgr.setFlagArt(false);
+ConstellationMgr.setFlagBoundaries(true);
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagLabels(true);
+core.wait(3);
+
+var shift = 0;
+for (i=0; i<constellation.length; i++)
+{
+	showConstellation(constellation[i], aFOV[i]);
+
+	StelSkyDrawer.setRelativeStarScale(0.5);
+	StelSkyDrawer.setAbsoluteStarScale(2.0);
+
+	for (j=shift; j<(shift+npercons[i]); j++)
+	{
+		core.moveToRaDec(listaobjetos[j][0], listaobjetos[j][1]);
+		StelMovementMgr.zoomTo(listaobjetos[j][2], 3);
+		
+		var dsname = LabelMgr.labelScreen("#" + (j+1) + " - " + listaobjetos[j][3], 20, 20, false, 30, color);
+		var dsinfo = LabelMgr.labelScreen("Separation:" + " " + listaobjetos[j][4], 20, 60, false, 20, color);
+		var dsnote = LabelMgr.labelScreen(listaobjetos[j][5], 20, 90, false, 20, color);
+
+		LabelMgr.setLabelShow(dsname, true);
+		LabelMgr.setLabelShow(dsinfo, true);
+		LabelMgr.setLabelShow(dsnote, true);
+
+		core.wait(5);
+
+		LabelMgr.setLabelShow(dsname, false);
+		LabelMgr.setLabelShow(dsinfo, false);
+		LabelMgr.setLabelShow(dsnote, false);
+	}
+	
+	shift+=npercons[i];
+	core.wait(1);
+	StelSkyDrawer.setRelativeStarScale(relscale);
+	StelSkyDrawer.setAbsoluteStarScale(absscale);
+}
+core.clear("natural");
+core.setGuiVisible(true);
+core.goHome();
